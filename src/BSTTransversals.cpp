@@ -55,7 +55,6 @@ void inodr_trav(struct node* root, int *i, int *arr)
 	{
 		inodr_trav(root->left, i, arr);
 		arr[*i] = root->data;
-		printf("i val & data is %d\t%d\n", *i, root->data);
 		++*i;
 		inodr_trav(root->right, i, arr);
 	}
