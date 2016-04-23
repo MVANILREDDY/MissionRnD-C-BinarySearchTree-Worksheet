@@ -31,7 +31,45 @@ struct node{
 	int data;
 	struct node *right;
 };
-
+void swap_data(struct node*, struct node*);
+void inoder_travel(struct node *, struct node**, struct node**, struct node **);
 void fix_bst(struct node *root){
-
+	if (root == NULL)
+	{
+		return;
+	}
+	else
+	{
+		struct node *temp1 = NULL, *temp2 = NULL, **loop;
+		loop = (struct node**)malloc(1 * sizeof(struct node));
+		loop[0] = NULL;
+		inoder_travel(root, &temp1, &temp2, loop);
+		swap_data(temp1, temp2);
+	}
+}
+void inoder_travel(struct node *root, struct node**temp1, struct node**temp2, struct node **loop)
+{
+	if (root == NULL)
+		return;
+	inoder_travel(root->left, temp1, temp2, loop);
+	if (loop[0] != NULL){
+		if (root->data < loop[0]->data){
+			if (*temp1 == NULL)
+			{
+				*temp1 = loop[0];
+				*temp2 = root;
+			}
+			else
+				*temp2 = root;
+		}
+	}
+	loop[0] = root;
+	inoder_travel(root->right, temp1, temp2, loop);
+}
+void swap_data(struct node *temp1, struct node* temp2)
+{
+	int aux;
+	aux = temp1->data;
+	temp1->data = temp2->data;
+	temp2->data = aux;
 }
