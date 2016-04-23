@@ -21,15 +21,64 @@ struct node{
 	int data;
 	struct node *right;
 };
-
+void inodr_trav(struct node*, int*, int*);
+void preodr_trav(struct node*, int*, int*);
+void postodr_trav(struct node*, int*, int*);
 
 void inorder(struct node *root, int *arr){
+	int i = 0;
+	if (root != NULL)
+	{
+		inodr_trav(root, &i, arr);
+	}
 	
 }
 void preorder(struct node *root, int *arr){
-	
+
+	int i = 0;
+	if (root != NULL)
+	{
+		preodr_trav(root, &i, arr);
+	}
 }
 void postorder(struct node *root, int *arr){
+	int i = 0;
+	if (root != NULL)
+	{
+		postodr_trav(root, &i, arr);
+	}
 	
+}
+void inodr_trav(struct node* root, int *i, int *arr)
+{
+	if (root != NULL&&arr!=NULL)
+	{
+		inodr_trav(root->left, i, arr);
+		arr[*i] = root->data;
+		printf("i val & data is %d\t%d\n", *i, root->data);
+		++*i;
+		inodr_trav(root->right, i, arr);
+	}
+}
+void preodr_trav(struct node*root, int *i, int *arr)
+{
+	if (root != NULL&&arr!=NULL)
+	{
+		arr[*i] = root->data;
+		++*i;
+		preodr_trav(root->left, i, arr);
+
+		preodr_trav(root->right, i, arr);
+	}
+}
+void postodr_trav(struct node*root, int *i, int* arr)
+{
+	if (root != NULL&&arr!=NULL)
+	{
+		postodr_trav(root->left, i, arr);
+		postodr_trav(root->right, i, arr);
+		arr[*i] = root->data;
+		++*i;
+	}
 }
 
